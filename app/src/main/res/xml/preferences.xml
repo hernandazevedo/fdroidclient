@@ -25,7 +25,7 @@
     <PreferenceCategory android:title="@string/updates">
         <com.geecko.QuickLyric.view.AppCompatListPreference android:title="@string/update_interval"
             android:key="updateInterval"
-            android:defaultValue="24"
+            android:defaultValue="1"
             android:entries="@array/updateIntervalNames"
             android:entryValues="@array/updateIntervalValues" />
         <CheckBoxPreference android:title="@string/automatic_scan_wifi"
@@ -33,7 +33,7 @@
             android:key="updateOnWifiOnly" />
         <CheckBoxPreference android:title="@string/update_auto_download"
             android:summary="@string/update_auto_download_summary"
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="updateAutoDownload" />
         <CheckBoxPreference android:title="@string/notify"
             android:defaultValue="true"
@@ -97,7 +97,7 @@
             android:entries="@array/keepCacheNames"
             android:entryValues="@array/keepCacheValues" />
         <CheckBoxPreference android:title="@string/expert"
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="expert" />
         <CheckBoxPreference
             android:key="unstableUpdates"

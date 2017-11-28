@@ -5,8 +5,7 @@
 
     <uses-sdk
         android:minSdkVersion="10"
-        android:targetSdkVersion="24"
-        />
+        android:targetSdkVersion="24" />
 
     <supports-screens
         android:anyDensity="true"
@@ -14,8 +13,7 @@
         android:normalScreens="true"
         android:resizeable="true"
         android:smallScreens="true"
-        android:xlargeScreens="true"
-        />
+        android:xlargeScreens="true" />
 
     <uses-feature
         android:name="android.hardware.telephony"
@@ -46,69 +44,62 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.NFC" />
 
-    <!-- Indicate that F-Droid may request root access (introduced by Koush's Superuser app)
+    <!--
+         Indicate that F-Droid may request root access (introduced by Koush's Superuser app)
          This permission is deprecated, but necessary for some old superuser
-         apps to actually grant superuser access to F-Droid. -->
-    <uses-permission android:name="android.permission.ACCESS_SUPERUSER"/>
+         apps to actually grant superuser access to F-Droid.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_SUPERUSER" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".FDroidApp"
+        android:allowBackup="true"
+        android:description="@string/app_description"
+        android:fullBackupContent="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:description="@string/app_description"
-        android:allowBackup="true"
-        android:fullBackupContent="true"
-        android:theme="@style/AppThemeLight"
         android:supportsRtl="true"
-        >
-
+        android:theme="@style/AppThemeLight">
         <provider
+            android:name=".data.AppProvider"
             android:authorities="org.fdroid.fdroid.data.AppProvider"
-            android:name="org.fdroid.fdroid.data.AppProvider"
-            android:exported="false"/>
-
+            android:exported="false" />
         <provider
+            android:name=".data.RepoProvider"
             android:authorities="org.fdroid.fdroid.data.RepoProvider"
-            android:name="org.fdroid.fdroid.data.RepoProvider"
-            android:exported="false"/>
-
+            android:exported="false" />
         <provider
+            android:name=".data.ApkProvider"
             android:authorities="org.fdroid.fdroid.data.ApkProvider"
-            android:name="org.fdroid.fdroid.data.ApkProvider"
-            android:exported="false"/>
-
+            android:exported="false" />
         <provider
+            android:name=".data.TempApkProvider"
             android:authorities="org.fdroid.fdroid.data.TempApkProvider"
-            android:name="org.fdroid.fdroid.data.TempApkProvider"
-            android:exported="false"/>
-
+            android:exported="false" />
         <provider
+            android:name=".data.TempAppProvider"
             android:authorities="org.fdroid.fdroid.data.TempAppProvider"
-            android:name="org.fdroid.fdroid.data.TempAppProvider"
-            android:exported="false"/>
-
+            android:exported="false" />
         <provider
+            android:name=".data.InstalledAppProvider"
             android:authorities="org.fdroid.fdroid.data.InstalledAppProvider"
-            android:name="org.fdroid.fdroid.data.InstalledAppProvider"
-            android:exported="false"/>
-
+            android:exported="false" />
         <provider
+            android:name=".data.AppPrefsProvider"
             android:authorities="org.fdroid.fdroid.data.AppPrefsProvider"
-            android:name="org.fdroid.fdroid.data.AppPrefsProvider"
-            android:exported="false"/>
-
+            android:exported="false" />
         <provider
+            android:name=".data.PackageProvider"
             android:authorities="org.fdroid.fdroid.data.PackageProvider"
-            android:name="org.fdroid.fdroid.data.PackageProvider"
-            android:exported="false"/>
-
+            android:exported="false" />
         <provider
+            android:name=".data.CategoryProvider"
             android:authorities="org.fdroid.fdroid.data.CategoryProvider"
-            android:name="org.fdroid.fdroid.data.CategoryProvider"
-            android:exported="false"/>
-
+            android:exported="false" />
         <provider
-            android:name="org.fdroid.fdroid.installer.ApkFileProvider"
+            android:name=".installer.ApkFileProvider"
             android:authorities="org.fdroid.fdroid.installer.ApkFileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -128,11 +119,11 @@
 
         <activity
             android:name=".privileged.views.InstallConfirmActivity"
-            android:label="@string/menu_install"
-            android:theme="@style/MinWithDialogBaseThemeLight"
+            android:configChanges="layoutDirection|locale"
             android:excludeFromRecents="true"
+            android:label="@string/menu_install"
             android:parentActivityName=".views.main.MainActivity"
-            android:configChanges="layoutDirection|locale" >
+            android:theme="@style/MinWithDialogBaseThemeLight">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.main.MainActivity" />
@@ -143,13 +134,14 @@
             android:theme="@style/AppThemeTransparent" />
         <activity
             android:name=".views.ManageReposActivity"
+            android:configChanges="layoutDirection|locale"
             android:label="@string/menu_manage"
             android:launchMode="singleTask"
-            android:parentActivityName=".views.main.MainActivity"
-            android:configChanges="layoutDirection|locale" >
+            android:parentActivityName=".views.main.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.main.MainActivity" />
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -160,43 +152,42 @@
         </activity>
         <activity
             android:name=".NfcNotEnabledActivity"
-            android:noHistory="true"
-            android:configChanges="layoutDirection|locale" />
+            android:configChanges="layoutDirection|locale"
+            android:noHistory="true" />
         <activity
             android:name=".views.RepoDetailsActivity"
+            android:configChanges="layoutDirection|locale"
             android:label="@string/repo_details"
             android:parentActivityName=".views.ManageReposActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:configChanges="layoutDirection|locale" >
+            android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.ManageReposActivity" />
         </activity>
-
         <activity
             android:name=".AppDetails2"
-            android:label="@string/app_details"
+            android:configChanges="layoutDirection|locale"
             android:exported="true"
-            android:parentActivityName=".views.main.MainActivity"
-            android:configChanges="layoutDirection|locale" >
+            android:label="@string/app_details"
+            android:parentActivityName=".views.main.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.main.MainActivity" />
         </activity>
         <activity
             android:name=".acra.CrashReportActivity"
-            android:theme="@style/AppThemeDark"
-            android:process=":error_report"
-            android:launchMode="singleInstance"
             android:excludeFromRecents="true"
-            android:finishOnTaskLaunch="true" />
+            android:finishOnTaskLaunch="true"
+            android:launchMode="singleInstance"
+            android:process=":error_report"
+            android:theme="@style/AppThemeDark" />
         <activity
-            android:label="@string/swap"
             android:name=".views.swap.SwapWorkflowActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/swap"
             android:parentActivityName=".views.main.MainActivity"
-            android:theme="@style/SwapTheme.Wizard"
             android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden">
+            android:theme="@style/SwapTheme.Wizard">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.main.MainActivity" />
@@ -205,10 +196,11 @@
         <activity
             android:name=".privileged.install.InstallExtensionDialogActivity"
             android:theme="@style/AppThemeTransparent" />
-        <activity android:name=".data.ObbUrlActivity"
+        <activity
+            android:name=".data.ObbUrlActivity"
             android:theme="@android:style/Theme.NoDisplay" />
-        <receiver
-            android:name=".privileged.install.InstallExtensionBootReceiver" >
+
+        <receiver android:name=".privileged.install.InstallExtensionBootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -222,14 +214,13 @@
             android:name=".installer.ErrorDialogActivity"
             android:theme="@style/AppThemeTransparent" />
 
-        <receiver android:name=".receiver.StartupReceiver" >
+        <receiver android:name=".receiver.StartupReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
 
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </receiver>
-
         <receiver android:name=".receiver.PackageManagerReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
@@ -239,14 +230,15 @@
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
-
-        <receiver android:name=".receiver.WifiStateChangeReceiver" >
+        <receiver android:name=".receiver.WifiStateChangeReceiver">
             <intent-filter>
                 <action android:name="android.net.wifi.STATE_CHANGE" />
             </intent-filter>
         </receiver>
+        <receiver
+            android:name=".NotificationBroadcastReceiver"
+            android:exported="false">
 
-        <receiver android:name=".NotificationBroadcastReceiver" android:exported="false">
             <!-- Doesn't require an intent-filter because it is explicitly invoked via Intent.setClass() -->
         </receiver>
 
@@ -288,7 +280,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-
             <!-- App URLs -->
 
             <intent-filter>
@@ -299,7 +290,6 @@
 
                 <data android:scheme="fdroid.app" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -312,7 +302,6 @@
                 <data android:host="www.f-droid.org" />
                 <data android:pathPrefix="/app/" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -325,16 +314,16 @@
                 <data android:host="www.f-droid.org" />
                 <data android:pathPrefix="/repository/browse" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="market" android:host="details" />
+                <data
+                    android:host="details"
+                    android:scheme="market" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -346,16 +335,17 @@
                 <data android:host="play.google.com" /> <!-- they don't do www. -->
                 <data android:path="/store/apps/details" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="amzn" android:host="apps" android:path="/android" />
+                <data
+                    android:host="apps"
+                    android:path="/android"
+                    android:scheme="amzn" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -369,7 +359,6 @@
                 <data android:path="/gp/mas/dl/android" />
             </intent-filter>
 
-
             <!-- Search URLs -->
 
             <intent-filter>
@@ -380,16 +369,16 @@
 
                 <data android:scheme="fdroid.search" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="market" android:host="search" />
+                <data
+                    android:host="search"
+                    android:scheme="market" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -401,7 +390,6 @@
                 <data android:host="play.google.com" /> <!-- they don't do www. -->
                 <data android:path="/store/search" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -410,8 +398,8 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
 
-
             <!-- Repo URLs -->
+
 
             <!--
             This intent serves two purposes: Swapping apps between devices and adding a
@@ -445,7 +433,6 @@
                 <data android:scheme="FDROIDREPO" />
                 <data android:scheme="fdroidrepos" />
                 <data android:scheme="FDROIDREPOS" />
-
                 <data android:host="*" />
 
                 <!--
@@ -480,7 +467,6 @@
                 <data android:pathPattern="/.*/.*/.*/FDROID/REPO" />
             </intent-filter>
 
-
             <!-- Handle NFC tags detected from outside our application -->
 
             <intent-filter>
@@ -495,21 +481,27 @@
                 <data android:scheme="fdroidrepo" />
                 <data android:scheme="fdroidrepos" />
             </intent-filter>
-
         </activity>
-
         <activity android:name=".views.apps.AppListActivity" />
-
-        <activity android:name=".views.installed.InstalledAppsActivity"
+        <activity
+            android:name=".views.installed.InstalledAppsActivity"
             android:parentActivityName=".views.main.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.main.MainActivity" />
         </activity>
-
-        <activity android:name=".AboutActivity" android:theme="@style/Theme.AppCompat.Light.Dialog" />
-        <activity android:name=".installer.FileInstallerActivity" android:theme="@style/AppThemeTransparent" />
-
+        <activity
+            android:name=".AboutActivity"
+            android:theme="@style/Theme.AppCompat.Light.Dialog" />
+        <activity
+            android:name=".installer.FileInstallerActivity"
+            android:theme="@style/AppThemeTransparent" />
+        <activity android:name=".InstallerActivity" android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter>
+                <action android:name="org.fdroid.fdroid.ACTION_INSTALL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

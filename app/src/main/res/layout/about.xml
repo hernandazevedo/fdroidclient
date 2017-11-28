@@ -19,6 +19,15 @@
             android:text="@string/unknown"
             style="@style/BodyText" />
 
+
+        <TextView
+            android:text="@string/about_version_code"
+            style="@style/CaptionText" />
+        <TextView
+            android:id="@+id/apkVersionCode"
+            android:text="@string/apkVersionCode"
+            style="@style/BodyText" />
+
         <TextView
             android:text="@string/about_site"
             style="@style/CaptionText" />

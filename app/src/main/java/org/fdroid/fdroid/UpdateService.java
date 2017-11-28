@@ -35,6 +35,7 @@ import android.os.Looper;
 import android.os.Process;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
@@ -424,8 +425,16 @@ public class UpdateService extends IntentService {
                     Log.e(TAG, "Error updating repository " + repo.address, e);
                 }
 
-                // now that downloading the index is done, start downloading updates
-                if (changes && fdroidPrefs.isAutoDownloadEnabled()) {
+//                 now that downloading the index is done, start downloading updates
+//                if (changes && fdroidPrefs.isAutoDownloadEnabled()) {
+//                    autoDownloadUpdates(this);
+//                }
+
+                /* If some app is with status update available due to install error, we must try to install again automatically.
+                   This is a workaround for the issue https://gitlab.com/fdroid/fdroidclient/issues/728
+                 */
+
+                if (fdroidPrefs.isAutoDownloadEnabled()) {
                     autoDownloadUpdates(this);
                 }
             }
